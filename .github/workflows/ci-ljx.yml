@@ -94,7 +94,7 @@ jobs:
 
 
     - name: Load custom configuration,shell $DIY_P2_SH
-      if: ( -e $DIY_P2_SH)
+      if: ( [ -e $DIY_P2_SH ] )
       run: |
         cp $DIY_P2_SH openwrt/$DIY_P2_SH
         cd openwrt
