@@ -17,7 +17,7 @@ on:
       ssh:
         description: 'SSH connection to Actions'
         required: false
-        default: 'false'
+        default: 'true'
 
 env:
   #REPO_URL: https://github.com/coolsnowwolf/lede
@@ -93,13 +93,7 @@ jobs:
         cd openwrt && ./prepareCompile.sh
 
 
-    - name: Load custom configuration,shell $DIY_P2_SH
-      if: ( [ -e $DIY_P2_SH ] )
-      run: |
-        cp $DIY_P2_SH openwrt/$DIY_P2_SH
-        cd openwrt
-        chmod +x $DIY_P2_SH        
-        ./$DIY_P2_SH
+
 
 
     - name: SSH connection to Actions
