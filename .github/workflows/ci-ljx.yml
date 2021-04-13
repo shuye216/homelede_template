@@ -8,7 +8,7 @@
 # Description: Build OpenWrt using GitHub Actions
 #
 
-name: Build OpenWrt,HomeLede ljx 2021.04.13
+name: Build OpenWrt,HomeLede ljx add config 2021.04.13
 
 on:
   repository_dispatch:
@@ -27,6 +27,7 @@ env:
   REPO_URL: https://github.com/xiaoqingfengATGH/HomeLede
   REPO_BRANCH: k5
   FEEDS_CONF: feeds.conf.default
+  BAK_CONF: ljx.config
   CONFIG_FILE: .config
   DIY_P1_SH: diy-part1.sh
   DIY_P2_SH: diy-part2.sh
@@ -78,11 +79,27 @@ jobs:
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/HomeLede
 
+    - name: ljx,copy bak config
+      run: |
+        [ -e $BAK_CONF ] && cp $BAK_CONF openwrt/.config.default
+        #chmod +x $DIY_P1_SH
+        #cd openwrt
+        #$GITHUB_WORKSPACE/$DIY_P1_SH
 
-    - name: Clone source code,ljx
+
+    - name: Clone source code,ljx prepare Compile
       working-directory: /workdir
       run: |
         cd openwrt && ./prepareCompile.sh
+
+
+    - name: Load custom configuration,shell $DIY_P2_SH
+      if: ( -e $DIY_P2_SH)
+      run: |
+        cp $DIY_P2_SH openwrt/$DIY_P2_SH
+        cd openwrt
+        chmod +x $DIY_P2_SH        
+        ./$DIY_P2_SH
 
 
     - name: SSH connection to Actions
