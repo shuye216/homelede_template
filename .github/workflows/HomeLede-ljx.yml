@@ -27,7 +27,7 @@ env:
   REPO_URL: https://github.com/xiaoqingfengATGH/HomeLede
   REPO_BRANCH: k5
   FEEDS_CONF: feeds.conf.default
-  BAK_CONF: ljx.config
+  CONFIG_FILE_BAK: ljx.config
   CONFIG_FILE: .config
   DIY_P1_SH: diy-part1.sh
   DIY_P2_SH: diy-part2.sh
@@ -74,17 +74,18 @@ jobs:
         git clone $REPO_URL -b $REPO_BRANCH openwrt
         #cd HomeLede
         #git checkout -b k5 origin/k5
-        ln -sf /workdir/HomeLede /workdir/openwrt
-        ln -sf /workdir/openwrt /workdir/HomeLede
-        ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
+        #ln -sf /workdir/HomeLede /workdir/openwrt
+        #ln -sf /workdir/openwrt /workdir/HomeLede
+        #ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
+        ln -sf openwrt HomeLede
+        ln -sf /workdir/openwrt $GITHUB_WORKSPACE/HomeLede
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/HomeLede
 
     - name: ljx,copy bak config
+      working-directory: /workdir
       run: |
-        [ -e $BAK_CONF ] && cp $BAK_CONF openwrt/.config.default
-        #chmod +x $DIY_P1_SH
-        #cd openwrt
-        #$GITHUB_WORKSPACE/$DIY_P1_SH
+        [ -e $CONFIG_FILE_BAK ] && [ ! -e $CONFIG_FILE ] && cp $CONFIG_FILE_BAK openwrt/$CONFIG_FILE
+
 
 
     - name: Clone source code,ljx prepare Compile
