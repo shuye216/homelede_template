@@ -1,0 +1,32 @@
+name: Build OpenWrt,HomeLede ljx add config 2021.04.14-test
+
+on:
+  repository_dispatch:
+  workflow_dispatch:
+    inputs:
+      ssh:
+        description: 'SSH connection to Actions'
+        required: false
+        default: 'true'
+
+env:
+  CONFIG_FILE_BAK: ljx.config
+  CONFIG_FILE: .config
+
+
+jobs:
+  build:
+    runs-on:ubuntu-20.04
+    
+    steps:
+      - name:checkout
+        uses:actions/checkout@main
+        
+      - name: ljx,copy bak config
+        working-directory: /workdir
+        run: |
+          [[ -e $CONFIG_FILE_BAK  &&  ! -e $CONFIG_FILE ]] && cp $CONFIG_FILE_BAK openwrt/$CONFIG_FILE
+
+    
+
+
