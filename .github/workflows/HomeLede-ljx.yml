@@ -8,7 +8,7 @@
 # Description: Build OpenWrt using GitHub Actions
 #
 
-name: Build OpenWrt,HomeLede ljx add config 2021.04.13
+name: HomeLede ljx add config 2021.04.14
 
 on:
   repository_dispatch:
@@ -80,13 +80,6 @@ jobs:
         ln -sf openwrt HomeLede
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/HomeLede
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/HomeLede
-
-    - name: ljx,copy bak config
-      working-directory: /workdir
-      run: |
-        [ -e $CONFIG_FILE_BAK ] && [ ! -e $CONFIG_FILE ] && cp $CONFIG_FILE_BAK openwrt/$CONFIG_FILE
-
-
 
     - name: Clone source code,ljx prepare Compile
       working-directory: /workdir
