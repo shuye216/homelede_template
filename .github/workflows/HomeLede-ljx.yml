@@ -71,20 +71,23 @@ jobs:
         #git clone $REPO_URL -b $REPO_BRANCH openwrt
         #git clone https://github.com/xiaoqingfengATGH/HomeLede.git -b k5 HomeLede
         #git clone $REPO_URL -b $REPO_BRANCH HomeLede
-        git clone $REPO_URL -b $REPO_BRANCH openwrt
+        mkdir -p /workdir/openwrt
+        git clone $REPO_URL -b $REPO_BRANCH /workdir/openwrt
         #cd HomeLede
         #git checkout -b k5 origin/k5
         #ln -sf /workdir/HomeLede /workdir/openwrt
         #ln -sf /workdir/openwrt /workdir/HomeLede
         #ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
+        cd /workdir
         ln -sf openwrt HomeLede
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/HomeLede
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/HomeLede
+        echo $GITHUB_WORKSPACE
 
     - name: Clone source code,ljx prepare Compile
       working-directory: /workdir
       run: |
-        cd openwrt && ./prepareCompile.sh
+        cd /workdir/openwrt && ./prepareCompile.sh
 
 
 
