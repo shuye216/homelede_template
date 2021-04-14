@@ -16,17 +16,10 @@ env:
 
 jobs:
   build:
-    runs-on:ubuntu-20.04
-    
+    runs-on: ubuntu-18.04
+
     steps:
-      - name:checkout
-        uses:actions/checkout@main
-        
-      - name: ljx,copy bak config
-        working-directory: /workdir
-        run: |
-          [[ -e $CONFIG_FILE_BAK  &&  ! -e $CONFIG_FILE ]] && cp $CONFIG_FILE_BAK openwrt/$CONFIG_FILE
-
-    
-
-
+    - name: ljx,copy bak config
+      working-directory: /workdir
+      run: |
+        ( -e $CONFIG_FILE_BAK ) && ( ! -e $CONFIG_FILE ) && ( cp $CONFIG_FILE_BAK openwrt/$CONFIG_FILE )
