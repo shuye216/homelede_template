@@ -80,13 +80,9 @@ jobs:
         #ln -sf /workdir/openwrt /workdir/HomeLede
         #ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
         
-        #2021.05.06
-        mkdir -p /workdir/openwrt
-        git clone https://github.com/xiaoqingfengATGH/HomeLede.git /workdir/openwrt        
-        cd /workdir/openwrt
-        git checkout -b k5 origin/k5
-        
+        #2021.05.06        
         cd /workdir
+        git clone https://github.com/xiaoqingfengATGH/HomeLede.git openwrt
         ln -sf openwrt HomeLede
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/HomeLede
