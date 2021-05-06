@@ -8,7 +8,7 @@
 # Description: Build OpenWrt using GitHub Actions
 #
 
-name: HomeLede ljx add config 2021.04.14
+name: HomeLede ljx add config 2021.05.06
 
 on:
   repository_dispatch:
@@ -80,7 +80,7 @@ jobs:
         #ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
         cd /workdir
         ln -sf openwrt HomeLede
-        ln -sf /workdir/openwrt $GITHUB_WORKSPACE/HomeLede
+        ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/HomeLede
         echo $GITHUB_WORKSPACE
 
